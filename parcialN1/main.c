@@ -6,9 +6,10 @@
 #include "mascota.h"
 #include "servicios.h"
 #include "trabajo.h"
+
 #define TAM_TIP 5
 #define TAM_COL 5
-#define TAM_MAS 3
+#define TAM_MAS 300
 #define TAM_SER 3
 #define TAM_TRA 1000
 
@@ -45,6 +46,7 @@ int main()
 
     initMascotas(mascotas,TAM_MAS);
     initTrabajo(trabajos,TAM_TRA);
+    //hardcodearAnimales(mascotas,TAM_MAS,10); //desabilitar paa probar
     do
     {
         switch(menu())

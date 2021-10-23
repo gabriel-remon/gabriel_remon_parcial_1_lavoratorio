@@ -147,7 +147,7 @@ int mostrarTrabajo(eTrabajo vec[], int tam,eServicio ser[], int tamSer,eMascota 
     if (vec != NULL && tam > 0  && ser!=NULL && tamSer>0 && mas!=NULL && tamMas)
     {
         printf("      *** Lista trabajos *** \n\n");
-        printf("Id trabajo       Nombre mascota        Servicio        Precio        Fecha\n");
+        printf("Id trabajo       Nombre mascota      Servicio        Precio        Fecha\n");
         for (int i = 0; i < tam; i++)
         {
             if(!(vec[i].isEmpty))
@@ -158,7 +158,7 @@ int mostrarTrabajo(eTrabajo vec[], int tam,eServicio ser[], int tamSer,eMascota 
                 descripccionServicio(ser,tamSer,vec[i].idServicio,servicio);
                 precioServicio= validarServicio(ser,tamSer,vec[i].idServicio);
 
-                printf("%-8d         %-10s             %-13s  $%d         %02d/%02d/%04d\n",
+                printf("%-8d         %-10s          %-13s   $%d        %02d/%02d/%04d\n",
                        vec[i].id,
                        nombreMascota,
                        servicio,
