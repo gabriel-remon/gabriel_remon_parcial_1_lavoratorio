@@ -1,3 +1,11 @@
+/*
+
+    autor: Gabriel Remon
+    fecha: 29/10/2021
+    descripcion: Segunda parte del primer parcial de lavoratorio
+    divicion: 1G
+
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include "utn.h"
