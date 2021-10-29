@@ -56,9 +56,9 @@ int mostrarColor( eColor vec[], int tam )
         for (int i = 0; i < tam; i++)
         {
             printf("  %d       %-10s\n",
-                    vec[i].id,
-                    vec[i].descripcion
-                    );
+                   vec[i].id,
+                   vec[i].descripcion
+                  );
         }
         printf("\n\n");
         todoOk = 1;

@@ -5,25 +5,33 @@ typedef struct
 {
     int id;
     char descripcion[20];
-}eTipo;
+} eTipo;
 
 #endif // COLOR_H_INCLUDED
 
 int validarTipo(eTipo vec[],int tam,int idBusqueda);
-/** Pide por parametro un id y lo compara con todos los id dentro del vector
+/** @brief recorre el vector vec[] y pregunta si hay al menos un dato con vec[].id == idBusqueda
+*   @param mas[] vector de tipo eTipo
+*   @param tamVec tamaño del vector eTipo
+*   @param idServicio valor que se usara para buscar
 *
-*   return (0) si no encuentra el valor o si fallo - (1) si encontro el id en el vector
+*   @return (0) si no se encontro - (1) si encontro vec[].id == idBusqueda
 */
-
 int descripcionTipo(eTipo vec[],int tam, int idBusqueda, char descipcion[]);
-/** pide un id por parametro y busca ese id dentro de vec. si lo encuentra carga lo que este en
-*   vec.descripcion dentro del string descripcion
+/** @brief pide un id por parametro y busca ese id dentro de vec[].id si lo encuentra carga lo que este en
+*          vec.descripcion dentro del string descripcion
+*   @param vec[] vector de tipo eTipo
+*   @param tamMas tamaño del vector eTipo
+*   @param idBusqueda valor que sera buscado dentro del vector
+*   @param descripcion string de estritura
 *
-*   return (-2) si huvo un error - (-1) no se encontro el id cargado - (0) todo ok
+*   @return (-1) si huvo un error - (-2) no se encontro el id cargado - (0) todo ok
 */
 
 int mostrarTipo( eTipo vec[], int tam );
-/** muestra una tabla con todos los valores en vec
+/** @brief muestra una tabla con todos los valores en vec que esten con el espacio vec.isempty en 1
+*   @param vec[] vector de tipo eTipo
+*   @param tamMas tamaño del vector eTipo
 *
-*   return (-1) si huvo un error - (0) si todo ok
+*   @return (-1) si huvo un error - (0) si todo ok
 */

@@ -43,6 +43,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="fecha.h" />
+		<Unit filename="listas.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="listas.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

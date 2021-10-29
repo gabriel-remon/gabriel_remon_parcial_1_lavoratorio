@@ -42,6 +42,10 @@ int altaTrabajo( eTrabajo vec[],int tam,eServicio ser[], int tamSer,eMascota mas
 
             do
             {
+                if(espacioLibreTrabajo(vec,tam) ==-1)
+                {
+                    goto salir;
+                }
                 utn_clear();
                 printf("******** alta trabajo ********\n\n");
                 mostrarMascotas(mas,tamMas,col,tamCol,tip,tamTip);
@@ -75,19 +79,22 @@ int altaTrabajo( eTrabajo vec[],int tam,eServicio ser[], int tamSer,eMascota mas
                         vec[posicion]=aux;
                         printf("Trabajo cargado con exito \n");
 
-                        utn_getCharDos(&exit,"\nDesea ingresar otro trabajo?(S/N) ", "Error, Ingrese 'S' o 'N'\n",'S','N');
+                        utn_confirmar(&exit,"\nDesea ingresar otro trabajo?(S/N) ", "Error, Ingrese 'S' o 'N'\n",'S','N');
 
                     }
                     else
                     {
+                        salir:
+                        utn_clear();
                         printf("No se pueden cargar Trabajos, para hacerlo de de baja un trabajo");
-                        exit='n';
+                        exit='N';
                     }
                 }
                 else
                 {
+                    utn_clear();
                     printf("No se encontro el id ingresado\n");
-                    utn_getCharDos(&exit,"\nDesea ingresar otro id?(S/N) ", "Error, Ingrese 'S' o 'N'\n",'S','N');
+                    utn_confirmar(&exit,"\nDesea ingresar otro id?(S/N) ", "Error, Ingrese 'S' o 'N'\n",'S','N');
                 }
 
             }
@@ -177,11 +184,13 @@ int mostrarTrabajo(eTrabajo vec[], int tam,eServicio ser[], int tamSer,eMascota 
 }
 
 
-/*
-int ordenarTrabajos(eTrabajo vec[], int tam)
+
+int ordenarTrabajos(eTrabajo vec[], int tam, eMascota mas[], int tamMas)
 {
     int retorno=-1;
     int comparadorNombre;
+    int posicionMascotaI;
+    int posicionMascotaJ;
     eTrabajo aux;
 
     if(vec!=NULL && tam>0)
@@ -192,12 +201,14 @@ int ordenarTrabajos(eTrabajo vec[], int tam)
             {
                 continue;
             }
+            posicionMascotaI=validarMarcotaId(mas,tamMas,vec[i].idMscota);
             for(int j=i+1; j<tam; j++)
             {
-                comparadorNombre=strncasecmp(vec[i].nombreMascota, vec[j].nombreMascota, sizeof(vec[i].nombreMascota));
+                posicionMascotaJ=validarMarcotaId(mas,tamMas,vec[j].idMscota);
+                comparadorNombre=strncasecmp(mas[posicionMascotaI].nombreMascota, mas[posicionMascotaJ].nombreMascota, sizeof(mas[0].nombreMascota));
                 if( !(vec[j].isEmpty) &&
                         (vec[i].fecha.anio < vec[j].fecha.anio ||
-                        (comparadorNombre>0 && vec[i].fecha.anio == vec[j].fecha.anio)
+                         (comparadorNombre>0 && vec[i].fecha.anio == vec[j].fecha.anio)
                         ))
                 {
                     aux=vec[i];
@@ -212,4 +223,4 @@ int ordenarTrabajos(eTrabajo vec[], int tam)
 
     return retorno;
 }
-*/
+

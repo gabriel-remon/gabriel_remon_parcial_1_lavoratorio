@@ -58,10 +58,10 @@ int mostrarServicio( eServicio vec[], int tam )
         for (int i = 0; i < tam; i++)
         {
             printf("%d      %-15s    $%d\n",
-                    vec[i].id,
-                    vec[i].descripcion,
-                    vec[i].precio
-                    );
+                   vec[i].id,
+                   vec[i].descripcion,
+                   vec[i].precio
+                  );
         }
         printf("\n\n");
         todoOk = 1;

@@ -12,4 +12,4 @@ int hardcodearAnimales(eMascota mas[],int tamMas,int cant);
 /** funcion para probar el programa, carga hasta 10 mascotas
 *
 */
-
+int hardcodeartrabajos(eTrabajo tra[],int tamTra,int cant,int *idTrabajo);

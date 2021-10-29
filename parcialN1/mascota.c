@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include "utn.h"
 #include "mascota.h"
 
@@ -108,11 +109,13 @@ char menu()
     printf("G- LISTAR SERVICIOS\n");
     printf("H- ALTA TRABAJO\n");
     printf("I- LISTAR TRABAJOS\n");
+    printf("J- LISTADOS\n");
 
-
-    printf("J-SALIR\n\n");
+    printf("K- SALIR\n\n");
 
     utn_getChar(&retorno,"\nIngrese la opcion deseada: ", "Error, ingrese un caracter valido\n");
+    retorno= toupper(retorno);
+    utn_clear();
 
     return retorno;
 }
@@ -174,18 +177,19 @@ int altaMascota( eMascota vec[],int tam,eColor col[], int tamCol,eTipo tip[], in
 
 
                 utn_minMaxInt(&aux.edad,"Ingrese la edad de la mascota","Erro, edad no valido",1,40);
-                utn_getCharDos(&aux.vacunas,"La mascota esta vacunada? (S/N) ","Error, ingrese 'S' o 'N' ",'S','N');
+                utn_confirmar(&aux.vacunas,"La mascota esta vacunada? (S/N) ","Error, ingrese 'S' o 'N' ",'S','N');
 
                 aux.isEmpty=0;
 
                 vec[posicion]=aux;
                 printf("Mascota cargado con exito \n");
 
-                utn_getCharDos(&exit,"\nDesea ingresar otra mascota?(S/N) ", "Error, Ingrese 'S' o 'N'\n",'S','N');
+                utn_confirmar(&exit,"\nDesea ingresar otra mascota?(S/N) ", "Error, Ingrese 'S' o 'N'\n",'S','N');
 
             }
             else
             {
+                utn_clear();
                 printf("No se pueden cargar mas mascotas, para hacerlo realice la baja de una mascota");
                 exit='N';
             }
@@ -240,7 +244,7 @@ int modificarMascota( eMascota vec[],int tam,eColor col[], int tamCol,eTipo tip[
     if (vec != NULL && tam > 0 && col!=NULL && tamCol>0 && tip!=NULL && tamTip>0 )
     {
 
-        if(espacioLibreMascota(vec,tam)>=0)
+        if(espacioLibreMascota(vec,tam)!=-2)
         {
             do
             {
@@ -269,12 +273,12 @@ int modificarMascota( eMascota vec[],int tam,eColor col[], int tamCol,eTipo tip[
                             break;
 
                         case 'B':
-                            utn_getCharDos(&vec[posicion].vacunas,"La mascota esta vacunada? (S/N) ","Error, ingrese 's' o 'n' ",'S','N');
+                            utn_confirmar(&vec[posicion].vacunas,"La mascota esta vacunada? (S/N) ","Error, ingrese 's' o 'n' ",'S','N');
                             printf("\nServicio cambiado correctamente\n");
                             break;
 
                         case 'C':
-                            utn_getCharDos(&exit, "Esta seguro que desea salir (S/N)?", "Error ingrese 'S' o 'n'\n", 'S','N');
+                            utn_confirmar(&exit, "Esta seguro que desea salir (S/N)?", "Error ingrese 'S' o 'n'\n", 'S','N');
                             break;
                         default:
                             printf("Error, ingrese un caracter valido");
@@ -291,7 +295,7 @@ int modificarMascota( eMascota vec[],int tam,eColor col[], int tamCol,eTipo tip[
                 {
                     printf("\nId no encontrado\n");
                 }
-                utn_getCharDos(&exit,"\nDesea ingresar otro ID?(S/N) ", "Error, Ingrese 'S' o 'N'\n",'S','N');
+                utn_confirmar(&exit,"\nDesea ingresar otro ID?(S/N) ", "Error, Ingrese 'S' o 'N'\n",'S','N');
             }
             while(exit=='S');
         }
@@ -299,7 +303,7 @@ int modificarMascota( eMascota vec[],int tam,eColor col[], int tamCol,eTipo tip[
         {
             utn_clear();
 
-            printf("Primero deve cargar un trabajo.");
+            printf("Primero deve cargar una mascota.");
             retorno=1;
         }
     }
@@ -354,6 +358,7 @@ char modificacion()
     printf("C-SALIR\n\n");
 
     utn_getChar(&retorno,"\nIngrese la opcion a modificar: ", "Error, ingrese un caracter valido\n");
+    retorno= toupper(retorno);
 
     return retorno;
 }
@@ -386,7 +391,7 @@ int bajaMascota( eMascota vec[],int tam,eColor col[], int tamCol,eTipo tip[], in
 
                         mostrarUnaMacota(&vec[posicion],col,tamCol,tip,tamTip);
 
-                            utn_getCharDos(&confirmar, "Esta seguro que desea dar de baja a esta mascota? (S/N) ", "Error ingrese 'S' o 'N'\n", 'S','N');
+                            utn_confirmar(&confirmar, "Esta seguro que desea dar de baja a esta mascota? (S/N) ", "Error ingrese 'S' o 'N'\n", 'S','N');
                             if(confirmar=='S')
                             {
                                 vec[posicion].isEmpty=1;
@@ -406,7 +411,7 @@ int bajaMascota( eMascota vec[],int tam,eColor col[], int tamCol,eTipo tip[], in
                 {
                     printf("\nId no encontrado\n");
                 }
-                utn_getCharDos(&exit,"\nDesea ingresar otro ID?(S/N) ", "Error, Ingrese 'S' o 'N'\n",'S','N');
+                utn_confirmar(&exit,"\nDesea ingresar otro ID?(S/N) ", "Error, Ingrese 'S' o 'N'\n",'S','N');
         }
         else
         {

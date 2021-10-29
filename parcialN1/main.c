@@ -6,10 +6,12 @@
 #include "mascota.h"
 #include "servicios.h"
 #include "trabajo.h"
+#include "dataPrueva.h"
+#include "listas.h"
 
 #define TAM_TIP 5
 #define TAM_COL 5
-#define TAM_MAS 300
+#define TAM_MAS 100
 #define TAM_SER 3
 #define TAM_TRA 1000
 
@@ -41,12 +43,13 @@ int main()
     eMascota mascotas[TAM_MAS];
     eTrabajo trabajos[TAM_TRA];
 
-    char salir='n';
+    char salir='N';
     int nextId=2000;
 
     initMascotas(mascotas,TAM_MAS);
     initTrabajo(trabajos,TAM_TRA);
-    //hardcodearAnimales(mascotas,TAM_MAS,10); //desabilitar paa probar
+    hardcodearAnimales(mascotas,TAM_MAS,10); //habilitar para hardcodera para probar
+    hardcodeartrabajos(trabajos,TAM_TRA,10,&nextId);//habilitar para hardcodera para probar
     do
     {
         switch(menu())
@@ -64,8 +67,7 @@ int main()
             break;
 
         case 'D':
-                utn_clear();
-            if(espacioLibreMascota(mascotas,TAM_MAS)>=0)
+            if(espacioLibreMascota(mascotas,TAM_MAS)!=-2)
             {
                 ordenarMascotas(mascotas,TAM_MAS);
                 mostrarMascotas(mascotas,TAM_MAS,color,TAM_COL,tipoAnimal,TAM_TIP);
@@ -78,26 +80,23 @@ int main()
             break;
 
         case 'E':
-            utn_clear();
             mostrarTipo(tipoAnimal,TAM_TIP);
             break;
 
         case 'F':
-            utn_clear();
             mostrarColor(color,TAM_COL);
             break;
 
         case 'G':
-            utn_clear();
             mostrarServicio(servicion,TAM_SER);
             break;
         case 'H':
             altaTrabajo(trabajos,TAM_TRA,servicion,TAM_SER,mascotas,TAM_MAS,&nextId,color,TAM_COL,tipoAnimal,TAM_TIP);
             break;
         case 'I':
-                utn_clear();
-            if(espacioLibreTrabajo(trabajos,TAM_TRA)>=0)
+            if(espacioLibreTrabajo(trabajos,TAM_TRA)!=-2)
             {
+                ordenarTrabajos(trabajos,TAM_TRA,mascotas,TAM_MAS);
                 mostrarTrabajo(trabajos,TAM_TRA,servicion,TAM_SER,mascotas,TAM_MAS);
             }
             else
@@ -105,8 +104,13 @@ int main()
                 printf("Primero deve cargar un trabajo");
             }
             break;
-        case 'j':
-            utn_getCharDos(&salir,"desea salir?(y/n) ", "Error ingrese 'n' o 'y'\n",'n','y');
+
+        case 'J':
+            mostrarListas(mascotas,TAM_MAS,color,TAM_COL,tipoAnimal,TAM_TIP,servicion,TAM_SER,trabajos,TAM_TRA);
+            break;
+
+        case 'K':
+            utn_confirmar(&salir,"desea salir?(S/N) ", "Error ingrese 'n' o 's'\n",'N','S');
             break;
         default:
             printf("Error, ingrese un caracter valido");
@@ -116,8 +120,9 @@ int main()
         }
         utn_stop();
         utn_clear();
+
     }
-    while(salir=='n');
+    while(salir=='N');
 
     return 0;
 }
